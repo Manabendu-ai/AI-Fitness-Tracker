@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="userservice" name="userservice" framework="JPA" ormUnit="userservice:userservice" defaultDataSourceId="4a4a9491-34ce-4784-bcef-c6709b87d72f" />
+    </persistence-units>
+  </component>
+</project>
