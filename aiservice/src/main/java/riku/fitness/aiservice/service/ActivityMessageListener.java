@@ -14,7 +14,7 @@ import riku.fitness.aiservice.repository.RecRepo;
 public class ActivityMessageListener {
 
     private final AiActivityService aiService;
-    private RecRepo repo;
+    private final RecRepo repo;
 
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "activity-processer-group")
     public void processActivity(Activity activity){
