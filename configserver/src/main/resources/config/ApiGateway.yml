@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/fitness-tracker/protocol/openid-connect/certs
   cloud:
     gateway:
       server:
@@ -26,10 +31,17 @@ management:
       exposure:
         include: "*"
 
+
 eureka:
   client:
     service-url:
       defaultZone : http://localhost:8761/eureka/
+      instance:
+        prefer-ip-address: false
+
+
+
+
 
 server:
   port: 2306

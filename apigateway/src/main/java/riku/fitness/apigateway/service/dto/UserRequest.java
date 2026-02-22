@@ -1,4 +1,4 @@
-package riiku.fitness.userservice.dto;
+package riku.fitness.apigateway.service.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

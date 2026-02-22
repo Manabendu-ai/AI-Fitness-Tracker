@@ -17,11 +17,22 @@ public class UserService {
     private final UserRepo repo;
 
     public UserResponse register(UserRequest req) {
+
+        User user;
+
         if(repo.existsByEmail(req.getEmail())){
-            throw new RuntimeException("Email Already Exists!");
+            user = repo.findByEmail(req.getEmail());
+            if(user.getKeycloakId() == null){
+                user.setKeycloakId(req.getKeyCloakId());
+                user = repo.save(user);
+            }
+
+        } else {
+            user = reqToUser(req);
+            user = repo.save(user);
         }
-        User user = reqToUser(req);
-        return userToRES(repo.save(user));
+
+        return userToRES(user);
     }
 
     public User reqToUser(UserRequest req){
@@ -30,6 +41,7 @@ public class UserService {
         user.setLastName(req.getLastName());
         user.setEmail(req.getEmail());
         user.setPassword(req.getPassword());
+        user.setKeycloakId(req.getKeyCloakId());
         return user;
     }
 
@@ -38,6 +50,7 @@ public class UserService {
         res.setFirstName(user.getFirstName());
         res.setLastName(user.getLastName());
         res.setEmail(user.getEmail());
+        res.setKeycloakId(user.getKeycloakId());
         res.setPassword(user.getPassword());
         res.setId(user.getId());
         res.setCreatedAt(user.getCreatedAt());
@@ -53,6 +66,6 @@ public class UserService {
 
     public boolean existsByUserId(String id) {
         log.info("Calling User Service for {}",id);
-        return repo.existsById(id);
+        return repo.existsByKeycloakId(id);
     }
 }
